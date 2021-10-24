@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         // Dark color theme
-        'bg': '#18191A',
+        'dark': '#18191A',
         'nav-footer': '#242526', 
         'card': '#242526',
         'button': '#3A3B3C',
@@ -15,9 +15,11 @@ module.exports = {
         'input-bg': '#3A3B3C',
         'text': '#E4E6EB',
         'faded-text': '#B0B3B8',
+        'focus-button': '#3C4C63',
+        'focus-button-icon': '#4395FF',
         
         // Light color theme
-        'light-bg' : '#F0F2F5',
+        'light' : '#EFF1F4',
         'light-nav-footer': '#FFFFFF',
         'light-card': '#FFFFFF',
         'light-button': '#E4E6EB',
@@ -27,6 +29,8 @@ module.exports = {
         'light-input-bg': '#F0F2F5',
         'light-text': '#050505',
         'light-faded-text': '#65676B',
+        'light-focus-button': '#DBE7F2',
+        'light-focus-button-icon': '#1770E6',
 
       }
     },

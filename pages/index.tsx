@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Navigation from '../components/navigation'
+import Banner from '../components/banner'
 
 const Home: NextPage = () => {
   return (
@@ -9,10 +8,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Ken Sidiangco</title>
       </Head>
-      <Navigation />
-      
-      <div className="containter mx-auto bg-black">
-        <h1 className="text-2xl text-white">Portfolio</h1>
+
+      <div className="container mx-auto ">
       </div>
     </>
   )
