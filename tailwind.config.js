@@ -17,6 +17,7 @@ module.exports = {
         'faded-text': '#B0B3B8',
         'focus-button': '#3C4C63',
         'focus-button-icon': '#4395FF',
+        'border': "#2F3031",
         
         // Light color theme
         'light' : '#EFF1F4',
@@ -31,6 +32,7 @@ module.exports = {
         'light-faded-text': '#65676B',
         'light-focus-button': '#DBE7F2',
         'light-focus-button-icon': '#1770E6',
+        'light-border': "#ECECEC",
 
       }
     },
@@ -38,6 +40,8 @@ module.exports = {
   variants: {
     extend: {
       opacity: ['disabled'],
+      brightness: ['hover', 'focus'],
+      backdropFilter: ['hover', 'focus'],
     },
   },
   plugins: [

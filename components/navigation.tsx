@@ -48,7 +48,7 @@ export default function Navigation() {
 
             {/* Dropdown Item */}
             {open && 
-                <div className="px-2 py-4 absolute shadow-lg left-3/4 top-3/4 bg-light-nav-footer dark:bg-nav-footer w-1/4 rounded-md mt-4 mr-4 font-semibold space-y-1 justify-center overflow-hidden border border-gray-200 dark:border-black">
+                <div className="px-2 py-4 absolute shadow-lg w-full top-8 md:w-32 md:left-3/4 md:top-3/4 md:w-1/4 rounded-md mt-4 md:mr-4 font-semibold space-y-1 justify-center overflow-hidden bg-light-nav-footer dark:bg-nav-footer border border-light-border dark:border-border">
                     
                     <CSSTransition 
                         in={activeMenu === 'main'}
