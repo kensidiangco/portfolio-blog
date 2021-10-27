@@ -22,7 +22,7 @@ export default function Navigation() {
         <nav className="sticky shadow-md top-0 z-50 bg-light-nav-footer dark:bg-nav-footer dark:text light-text flex items-center justify-between">
             <div className="font-semibold space-x-4 flex items-center">
                 <Link href="/" passHref>
-                    <span className="p-2 rounded-md cursor-pointer text-light-text dark:text-text"><FontAwesomeIcon icon={faHouseUser} size="lg" /></span>
+                    <span className="p-2 rounded-md cursor-pointer text-light-text dark:text-text hidden md:block">KEN.</span>
                 </Link>
             </div>
             <div className="font-semibold space-x-1 flex items-center">
