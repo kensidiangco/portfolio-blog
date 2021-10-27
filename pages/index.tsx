@@ -1,34 +1,55 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import Banner from '../components/banner'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false)
   const [postText, setPostText] = useState('')
+  const router = useRouter()
+  const dropdown = useRef(null);
 
-  useEffect(() => {  
-    if(open){
-      document.body.style.overflow = 'hidden';
-    }else{
-      document.body.style.overflow = 'unset';
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(event: { target: any }) {
+      if (dropdown.current && !dropdown.current.contains(event.target)) {
+        setOpen(false);
+      }
     }
-  },[])
 
+    window.addEventListener("click", handleClick);
+
+    return () => window.removeEventListener("click", handleClick);
+  }, [open]);
+
+  useEffect(() => {
+    if (typeof window === 'object') {
+      if(open){
+        router.push('/#makepost')
+        document.body.style.overflow = 'hidden';
+      }else{
+        document.body.style.overflow = 'unset';
+      }
+    }
+  },[open])
+
+  
   return (
     <>
       <Head>
         <title>Ken Sidiangco</title>
       </Head>
 
-      <div className="container mx-auto">
-
+      <div className="container mx-auto md:py-4">
+        <div className="flex justify-center">
+          <img src="/banner.png" alt="ken"/>
+        </div>
         <div className="md:w-1/2 m-auto md:space-y-4 justify-center items-center py-4 space-y-2 md:py-8">
 
           <div className="flex flex-col space-y-4">
             <div className="flex items-center bg-light-card dark:bg-card p-2 shadow md:shadow-md rounded-md">
                 <p className="p-3 bg-light-button dark:bg-button rounded-full text-sm m-2 font-semibold">KEN.</p>
-                <div className="bg-light-input-bg dark:bg-input-bg p-2 hover:bg-light-button-hover dark:hover:bg-button-hover rounded-full transition delay-50 cursor-text md:pr-40 w-full" onClick={() => setOpen(!open)}>
+                <div className="bg-light-input-bg dark:bg-input-bg p-2 hover:bg-light-button-hover dark:hover:bg-button-hover rounded-full transition delay-50 cursor-text md:pr-40 w-full" onClick={() => setOpen(b => !b)}>
                   <p className="text-light-faded-text dark:text-faded-text">{!!postText && !open ? "You have draft post" : "What's your thoughts, Ken?"}</p>
                 </div>
             </div>
@@ -131,21 +152,19 @@ const Home: NextPage = () => {
 
         </div>
 
+      </div>
         {open && 
-          <div className="flex flex-col rounded-md absolute inset-0 justify-center items-center backdrop-filter backdrop-blur-sm shadow-xl">
-            <div className="flex flex-col justify-center bg-light-card dark:bg-card border border-light-border dark:border-border rounded-md md:w-2/6 w-11/12 py-4 shadow-xl">
-              <div className="flex justify-center border-b border-light-border dark:border-border items-center relative">
-                <label className="text-xl font-semibold text-center pb-4">Create Post</label>
-                <span className="absolute -top-2 right-0 mr-2 bg-light-button dark:bg-button hover:bg-light-button-hover dark:hover:bg-button-hover font-semibold text-light-faded-text dark:text-faded-text px-4 py-2 rounded-full cursor-pointer transition delay-50" onClick={() => setOpen(false)}>X</span>
-              </div>
-              <form className="flex flex-col space-y-4 px-2">
-                <textarea cols={4} rows={4} placeholder="What's your thoughts, Ken?" className="bg-light-card dark:bg-card outline-none text-2xl rounded-md p-2 w-full break-words" style={{ resize: "none"}} value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
-                <input type="submit" value="Post" className="text-white font-semibold bg-light-active-button dark:bg-active-button cursor-pointer rounded-md p-2 w-full" />
-              </form>
+          <div className="fixed top-52 md:top-55 inset-x-0 mx-auto flex flex-col justify-center backdrop-filter backdrop-blur-2xl rounded-md md:w-2/6 w-11/12 py-4 shadow-xl" ref={dropdown} id="makepost">
+            <div className="flex justify-center mb-2 items-center relative">
+              <label className="md:text-2xl text-md font-semibold text-white text-center pb-4">Create Post</label>
+              <span className="absolute -top-2 right-0 mr-2 bg-light-button dark:bg-button hover:bg-light-button-hover dark:hover:bg-button-hover font-semibold text-light-faded-text dark:text-faded-text px-4 py-2 rounded-full cursor-pointer transition delay-50" onClick={() => setOpen(false)}>X</span>
             </div>
+            <form className="flex flex-col space-y-4 px-2">
+              <textarea cols={4} rows={4} placeholder="What's your thoughts, Ken?" className="bg-light-card dark:bg-card outline-none md:text-2xl text-xl rounded-md p-2 w-full break-words" style={{ resize: "none"}} value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
+              <input type="submit" value="Post" className="text-white font-semibold bg-light-active-button dark:bg-active-button cursor-pointer rounded-md p-2 w-full" />
+            </form>
           </div>
         }
-      </div>
     </>
   )
 }

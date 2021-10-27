@@ -1,22 +1,32 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser, faHome, faCaretDown, faImages, faCog, faUser, faAngleLeft, faAngleRight, faMoon } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import {useTheme} from 'next-themes'
 import { useRouter } from 'next/router'
 
 export default function Navigation() {
-    const [open, setOpen] = useState(false)
-    const [activeMenu, setActiveMenu] = useState('main')
     const {theme, setTheme} = useTheme()
+    const [activeMenu, setActiveMenu] = useState('main')
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdown = useRef(null);
     const router = useRouter()
     const path = router.pathname
+  
+    useEffect(() => {
+      if (!showDropdown) return;
+      function handleClick(event: { target: any }) {
+        if (dropdown.current && !dropdown.current.contains(event.target)) {
+          setShowDropdown(false);
+        }
+      }
 
-    const handleOpen = () => {
-        setActiveMenu('main')
-        setOpen(!open)
-    }
+      window.addEventListener("click", handleClick);
+
+      return () => window.removeEventListener("click", handleClick);
+    }, [showDropdown]);
+  
     
     return (
         <nav className="sticky shadow-md top-0 z-50 bg-light-nav-footer dark:bg-nav-footer dark:text light-text flex items-center justify-between">
@@ -41,14 +51,16 @@ export default function Navigation() {
             </div>
 
             <div className="font-semibold space-x-4 flex items-center">
-                <a onClick={() => handleOpen()}>
-                    <span className={`py-2 px-3 rounded-full cursor-pointer ${open ? "bg-light-focus-button text-light-focus-button-icon dark:bg-focus-button dark:text-focus-button-icon" : "text-light-faded-text dark:text-faded-text hover:bg-light-button-hover dark:hover:bg-button-hover bg-light-button dark:bg-button transition delay-50"}`}><FontAwesomeIcon icon={faCaretDown} size="lg"/></span>
+                <a onClick={() => setShowDropdown(b => !b)}>
+                    <span className={`py-2 px-3 rounded-full cursor-pointer ${showDropdown ? "bg-light-focus-button text-light-focus-button-icon dark:bg-focus-button dark:text-focus-button-icon" : "text-light-faded-text dark:text-faded-text hover:bg-light-button-hover dark:hover:bg-button-hover bg-light-button dark:bg-button transition delay-50"}`}><FontAwesomeIcon icon={faCaretDown} size="lg"/></span>
                 </a>
             </div>
 
             {/* Dropdown Item */}
-            {open && 
-                <div className="px-2 py-4 absolute shadow-lg w-full top-8 md:w-32 md:left-3/4 md:top-3/4 md:w-1/4 rounded-md mt-4 md:mr-4 font-semibold space-y-1 justify-center overflow-hidden bg-light-nav-footer dark:bg-nav-footer border border-light-border dark:border-border">
+            {showDropdown && 
+                <div className="px-2 py-4 absolute shadow-lg w-full top-8 md:w-32 md:right-0 md:mr-2 md:top-3/4 md:w-1/4 rounded-md mt-2 font-semibold space-y-1 justify-center overflow-hidden backdrop-filter backdrop-blur-2xl border border-light-border dark:border-border"
+                    ref={dropdown}
+                >
                     
                     <CSSTransition 
                         in={activeMenu === 'main'}
