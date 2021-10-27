@@ -156,7 +156,7 @@ const Home: NextPage = () => {
         {open && 
           <div className="fixed top-52 md:top-55 inset-x-0 mx-auto flex flex-col justify-center backdrop-filter backdrop-blur-2xl rounded-md md:w-2/6 w-11/12 py-4 shadow-xl" ref={dropdown} id="makepost">
             <div className="flex justify-center mb-2 items-center relative">
-              <label className="md:text-2xl text-md font-semibold text-white text-center pb-4">Create Post</label>
+              <label className="md:text-2xl text-md font-semibold text-light-text dark:text-text text-center pb-4">Create Post</label>
               <span className="absolute -top-2 right-0 mr-2 bg-light-button dark:bg-button hover:bg-light-button-hover dark:hover:bg-button-hover font-semibold text-light-faded-text dark:text-faded-text px-4 py-2 rounded-full cursor-pointer transition delay-50" onClick={() => setOpen(false)}>X</span>
             </div>
             <form className="flex flex-col space-y-4 px-2">
