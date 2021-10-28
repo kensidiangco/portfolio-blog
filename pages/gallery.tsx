@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 
 export default function Gallery() {
     return (
@@ -6,10 +7,10 @@ export default function Gallery() {
             <Head>
                 <title>Gallery</title>
             </Head>
-            <div className="container mx-auto">
-                <h1 className="text-center text-2xl">
-                    This is Gallery section
-                </h1>
+            <div className="container mx-auto md:py-6 py-4">
+                <div className="flex justify-center">
+                    <Image src={"/banner.png"} width={1000} height={250} objectFit="contain" loading="eager" alt="ken"/>
+                </div>
             </div>
         </>
     )

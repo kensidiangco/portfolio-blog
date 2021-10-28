@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import Image from 'next/image'
 
 export default function HomePage() {
     const [open, setOpen] = useState(false)
@@ -33,9 +34,9 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="container mx-auto md:py-4">
+            <div className="container mx-auto md:py-6 py-4">
                 <div className="flex justify-center">
-                    <img src="/banner.png" alt="ken"/>
+                    <Image src={"/blog.png"} width={1000} height={250} objectFit="contain" loading="eager" alt="ken"/>
                 </div>
                 <div className="md:w-1/2 m-auto md:space-y-4 justify-center items-center py-4 space-y-2 md:py-8">
 

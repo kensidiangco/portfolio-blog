@@ -10,7 +10,7 @@ export default function Navigation() {
     const {theme, setTheme} = useTheme()
     const [activeMenu, setActiveMenu] = useState('main')
     const [showDropdown, setShowDropdown] = useState(false);
-    const dropdown = useRef(null);
+    const dropdown = useRef<HTMLHeadingElement>(null);
     const router = useRouter()
     const path = router.pathname
   
@@ -73,8 +73,8 @@ export default function Navigation() {
                         classNames='menu-primary'
                     >
                         <div className="menu flex flex-col">
-                            <Link href="/" passHref>
-                                <span className="py-3 px-4 rounded hover:bg-light-nav-button-hover dark:hover:bg-nav-button-hover cursor-pointer transition delay-50"><span className="bg-light dark:bg-button rounded-full p-2 m-2 text-light-text dark:text-text"><FontAwesomeIcon icon={faUser} size="lg"/></span> Account</span>
+                            <Link href="/profile" passHref>
+                                <span className="py-3 px-4 rounded hover:bg-light-nav-button-hover dark:hover:bg-nav-button-hover cursor-pointer transition delay-50"><span className="bg-light dark:bg-button rounded-full p-2 m-2 text-light-text dark:text-text"><FontAwesomeIcon icon={faUser} size="lg"/></span> Profile</span>
                             </Link>
 
                             <span className="py-3 px-4 rounded hover:bg-light-nav-button-hover dark:hover:bg-nav-button-hover cursor-pointer transition delay-50" onClick={() => setActiveMenu('theme')}>
